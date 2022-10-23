@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Inventory {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Welcome! Please enter maximum number of computers: ");
+		int maxComputers = scanner.nextInt();
+		Computer[] computer = new Computer[maxComputers]; 
+		
+		while(maxComputers > 5) {
+			System.out.println("There is only 5 spaces to store computers, please enter agian!");
+			maxComputers = scanner.nextInt();
+			if(maxComputers < 5) {
+				break;
+			}
+		}
+		for(int i = 0; i < computer.length; i++) {
+			System.out.println("Enter your brand name: ");
+			String brand = scanner.next();
+			System.out.println("Enter your model: ");
+			String model = scanner.next();
+			System.out.println("Enter your SN:");
+			Long SN = scanner.nextLong();
+			System.out.println("Enter your price: ");
+			Double price = scanner.nextDouble();
+			computer[i] = new Computer(brand, model, SN, price);		
+		}
+		
+		System.out.println(computer.toString());
+		
+//		for(int i = 0; i < computer.length; i++) {
+//			System.out.println("Your computer index " + i + ": " + "The brand is: " + computer[i].getBrand()+ ", the model is: " + computer[i].getModel() + ", the SN is: " + computer[i].getSN()+ ", and the price is: " + computer[i].getPrice());
+//		}
+	}
+}

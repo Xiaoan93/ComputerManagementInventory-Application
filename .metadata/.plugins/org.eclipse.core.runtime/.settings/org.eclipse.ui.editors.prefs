@@ -1,0 +1,16 @@
+AbstractTextEditor.Color.Background=28,31,34
+AbstractTextEditor.Color.Background.SystemDefault=false
+AbstractTextEditor.Color.SelectionBackground.SystemDefault=false
+AbstractTextEditor.Color.SelectionForeground.SystemDefault=false
+eclipse.preferences.version=1
+showCarriageReturn=false
+showEnclosedIdeographicSpaces=false
+showEnclosedSpaces=false
+showEnclosedTabs=false
+showLeadingIdeographicSpaces=false
+showLeadingSpaces=false
+showLineFeed=false
+showTrailingIdeographicSpaces=false
+showTrailingSpaces=false
+showTrailingTabs=false
+showWhitespaceCharacters=true

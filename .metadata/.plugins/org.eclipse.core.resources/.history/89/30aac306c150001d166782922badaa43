@@ -1,0 +1,10 @@
+import java.util.ArrayList;
+
+public class arraylist {
+	public static void main(String[] args) {
+		ArrayList<String> computer = new ArrayList<>();
+		computer.add("qwe");
+		System.out.println(computer.size());
+	}
+	
+}

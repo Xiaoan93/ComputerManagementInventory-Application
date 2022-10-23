@@ -1,0 +1,266 @@
+
+import java.util.Scanner;
+// -----------------------------------------------------
+// Assignment 2
+// Written by: Xiaoan Lao 1610188
+// Date: 2022-10-20
+// -----------------------------------------------------
+
+public class Main {
+	static Scanner scanner = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		int choice= -1;
+		int maxNumber = -1 ;
+		System.out.println("Welcome! Please select how many computer you want to store: ");
+		Computer[] computer = new Computer[enterNumber(maxNumber)];
+		
+		do {
+			menu();
+			switch(enterNumber(choice)) {
+			case 1:
+				final String PASSWORD = "password";
+				String password = "";
+				int count = 3;
+				while(count > 0) {
+					System.out.println("Please enter your password: ");
+					password = scanner.next();
+					if(password.equals(PASSWORD)) {
+						Inventory(computer);
+						break;
+					}else {
+						System.out.println("Your password is wrong!");
+						count--;
+					}
+				}
+				if(count == 0) {
+					System.out.println("You are out of try, please select your option again.");
+				}
+
+				break;
+			case 2:
+				final String PASSWORD1 = "password";
+				int count1 = 3;
+				while(count1 > 0) {
+					System.out.println("Please enter your password: ");
+					password = scanner.next();
+					if(password.equals(PASSWORD1)) {
+						for(int i=0; i<Computer.findNumberOfCreatedComputers();i++) {
+							if(computer[i] == null) {
+								System.out.println("Nothing inside the inventory.");
+								break;
+							}else {
+								System.out.println("=============== Computer #" + i + " =======================");
+								System.out.println("Brand is:" + computer[i].getBrand());
+								System.out.println("Model is:" + computer[i].getModel());
+								System.out.println("SN is:" + computer[i].getSN());
+								System.out.println("Price is:" + computer[i].getPrice());
+								System.out.println();
+								}
+							}
+						System.out.println("Select your computer number: ");
+						int choiceIndex = scanner.nextInt();
+						if(choiceIndex < Computer.findNumberOfCreatedComputers()) {
+							do {
+								System.out.println("======== What information would you like to change ======");
+								System.out.println("1. Brand. ");
+								System.out.println("2. Model.");
+								System.out.println("3. SN.");
+								System.out.println("4. Price.");
+								System.out.println("5. Quit.");
+								System.out.println();
+								System.out.println("Enter your choice: ");
+								choice= scanner.nextInt();
+								
+								switch(choice) {
+								case 1:
+									System.out.println("Update your brand: ");
+									String newBrand = scanner.next();
+									for(int j=0; j<computer.length;j++) {
+										computer[choiceIndex].setBrand(newBrand);
+									}
+									System.out.println("=============== Computer #" + choiceIndex + " =======================");
+									System.out.println("Brand is:" + computer[choiceIndex].getBrand());
+									System.out.println("Model is:" + computer[choiceIndex].getModel());
+									System.out.println("SN is:" + computer[choiceIndex].getSN());
+									System.out.println("Price is:" + computer[choiceIndex].getPrice());
+									System.out.println();
+									break;
+								case 2:
+									System.out.println("Update your model: ");
+									String newModel = scanner.next();
+									for(int j=0; j<computer.length;j++) {	
+										computer[choiceIndex].setModel(newModel);
+									}
+									System.out.println("=============== Computer #" + choiceIndex + " =======================");
+									System.out.println("Brand is:" + computer[choiceIndex].getBrand());
+									System.out.println("Model is:" + computer[choiceIndex].getModel());
+									System.out.println("SN is:" + computer[choiceIndex].getSN());
+									System.out.println("Price is:" + computer[choiceIndex].getPrice());
+									System.out.println();
+									break;
+								case 3:
+									System.out.println("Update your SN: ");
+									Long newSN = scanner.nextLong();
+									for(int j=0; j<computer.length;j++) {	
+										computer[choiceIndex].setSN(newSN);
+									}
+									System.out.println("=============== Computer #" + choiceIndex + " =======================");
+									System.out.println("Brand is:" + computer[choiceIndex].getBrand());
+									System.out.println("Model is:" + computer[choiceIndex].getModel());
+									System.out.println("SN is:" + computer[choiceIndex].getSN());
+									System.out.println("Price is:" + computer[choiceIndex].getPrice());
+									System.out.println();
+									break;
+								case 4:
+									System.out.println("Update your Price: ");
+									double newPrice = scanner.nextLong();
+									for(int j=0; j<computer.length;j++) {	
+										computer[choiceIndex].setPrice(newPrice);
+									}
+									System.out.println("=============== Computer #" + choiceIndex + " =======================");
+									System.out.println("Brand is:" + computer[choiceIndex].getBrand());
+									System.out.println("Model is:" + computer[choiceIndex].getModel());
+									System.out.println("SN is:" + computer[choiceIndex].getSN());
+									System.out.println("Price is:" + computer[choiceIndex].getPrice());
+									System.out.println();
+									break;
+								case 5:	
+								break;
+								}
+							}while(false);
+						}
+						else{
+							System.out.println("This number does not exist.");
+							break;
+						}
+						break;
+					}else {
+						System.out.println("Your password is wrong!");
+						count1--;
+					}
+				}
+				if(count1 == 0) {
+					System.out.println("You are out of try, please select your option again.");
+				}
+				break;
+			case 3:
+				findComputersByBrand(computer);
+				break;
+			case 4:
+				findCheaperThan(computer);
+				break;
+			case 5:
+				System.out.println("Thank you for using Computer Inventory");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Please enter a valid number!");
+				break;
+			}
+		}while(true);
+	}
+	
+	public static void Inventory(Computer[] computer) {
+		int numberOfComputer; 
+		System.out.println("Enter the number of computers you want to store: ");
+		numberOfComputer = scanner.nextInt();
+		
+		if(numberOfComputer > ( computer.length - Computer.findNumberOfCreatedComputers())) {
+			System.out.println("Sorry, there is only " + (computer.length - Computer.findNumberOfCreatedComputers()) + " space to store computers.");
+			return;
+		}else {
+				for(int i = 0; i < numberOfComputer; i++) {
+				System.out.println("Enter your brand name: ");
+				String brand = scanner.next();
+				System.out.println("Enter your model: ");
+				String model = scanner.next();
+				System.out.println("Enter your SN:");
+				Long SN = scanner.nextLong();
+				System.out.println("Enter your price: ");
+				Double price = scanner.nextDouble();	
+				computer[Computer.findNumberOfCreatedComputers()] = new Computer(brand, model, SN, price);
+				}
+			}
+		for(int i = 0; i < Computer.findNumberOfCreatedComputers(); i++) {
+			System.out.println("Computer number " + i + ": The brand is: " + computer[i].getBrand()+ ", the model is: " + computer[i].getModel() + ", the SN is: " + computer[i].getSN()+ ", and the price is: " + computer[i].getPrice());
+		}
+	}
+	
+	public static void menu() {
+		System.out.println("============== Computer Inventory ===============");
+		System.out.println("1. Enter new computers (password required). ");
+		System.out.println("2. Change information of a computer (password required).");
+		System.out.println("3. Display all computers by a specific brand.");
+		System.out.println("4. Display all computers under a certain a price.");
+		System.out.println("5. Quit.");
+	}
+	
+	
+	public static void findComputersByBrand(Computer[] computer) {
+		System.out.println("Please enter the brand that you want to search: ");
+		String brand = scanner.next();
+		int count = 0;
+		if(Computer.findNumberOfCreatedComputers() != 0) {
+			for(int j=0; j<Computer.findNumberOfCreatedComputers(); j++) {
+				if(computer[j].getBrand().equals(brand)) {
+					System.out.println("Here is your result: ");
+					System.out.println("Brand is:" + computer[j].getBrand());
+					System.out.println("Model is:" + computer[j].getModel());
+					System.out.println("SN is:" + computer[j].getSN());
+					System.out.println("Price is:" + computer[j].getPrice());
+					System.out.println();
+				}else {
+					if(!(computer[j].getBrand().equals(brand))) {
+						count++;
+						if(count == Computer.findNumberOfCreatedComputers()) {
+							System.out.println("Sorry, this brand not found in the inventory");
+							break;
+						}
+					}
+				}
+			}
+		}else {
+			System.out.println("Nothing inside this inventory.");
+		}
+	}
+	
+	public static void findCheaperThan(Computer[] computer) {
+		System.out.println("Please enter the price that you want to search: ");
+		Double price = scanner.nextDouble();
+		int count = 0;
+		if(Computer.findNumberOfCreatedComputers() != 0) {
+			for(int j=0; j<Computer.findNumberOfCreatedComputers(); j++) {
+				if(computer[j].getPrice() < price) {
+					System.out.println("Here is your result: ");
+					System.out.println("Brand is:" + computer[j].getBrand());
+					System.out.println("Model is:" + computer[j].getModel());
+					System.out.println("SN is:" + computer[j].getSN());
+					System.out.println("Price is:" + computer[j].getPrice());
+					System.out.println();
+				}else {
+					if(!(computer[j].getPrice() < price)) {
+						count++;
+						if(count == Computer.findNumberOfCreatedComputers()) {
+							System.out.println("Sorry, there is no cheaper price than your entered in the inventory");
+							break;
+						}
+					}
+				}
+			}
+		}else {
+			System.out.println("Nothing inside this inventory.");
+		}
+	}
+	
+	//check if the input is integer or not, if it is then it will continue.
+	public static int enterNumber(int num) {
+		while(!scanner.hasNextInt()) {	
+			System.out.println("Please enter a valid number !");
+			scanner.next();
+		}return num = scanner.nextInt();
+	}
+	
+
+	
+}
